@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_icons %}
+
+{% block head_block %}
+	<title>AnonMSG Message Info</title>
+{% endblock %}
+
+{% block body_block %}
+	<div class="alert alert-success mt-4 d-flex align-items-center" role="alert">
+		<div class="bi me-4">
+			<span>{% bs_icon 'check' size="2.0em" %}</span>
+		</div>
+		<div>
+			<h3>Success!</h3>
+			Successfully created message: <b>{{ message_uuid }}</b><br/>
+			Please copy the message id and don't forget your passphrase.
+			This is the only time you can copy your message id.
+		</div>
+	</div>
+
+	<a class="btn btn-primary mt-2" href="/">Go Back</a>
+{% endblock %}

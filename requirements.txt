@@ -1,0 +1,4 @@
+Django==5.0.1
+django-bootstrap-icons==0.8.7
+django-grappelli==3.0.8
+tzdata=2023.4

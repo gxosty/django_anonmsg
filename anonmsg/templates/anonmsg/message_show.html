@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_icons %}
+
+{% block head_block %}
+	<title>AnonMSG Message Read</title>
+{% endblock %}
+
+{% block body_block %}
+	<div class="alert alert-warning mt-4 d-flex align-items-center" role="alert">
+		<div class="bi me-4">
+			<span>{% bs_icon 'exclamation-triangle-fill' size="2.0em" %}</span>
+		</div>
+		<div>
+			<h3>Warning!</h3>
+			Refreshing the page or closing the tab will delete this message. This is the only time you can read it.
+		</div>
+	</div>
+	<div class="card mt-4">
+		<div class="card-header">
+			<h4>Message</h4>
+		</div>
+		<div class="card-body">
+			<p>{{ message_text }}</p>
+		</div>
+		<div class="card-footer">
+			<a class="btn btn-danger" href="/">Delete Message</a>
+		</div>
+	</div>
+{% endblock %}

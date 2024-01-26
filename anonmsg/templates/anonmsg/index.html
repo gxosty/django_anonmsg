@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block head_block %}
+  <title>AnonMSG</title>
+  <script type="text/javascript" src="{% static 'anonmsg/index.js' %}"></script>
+{% endblock %}
+
+{% block body_block %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger" role="alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  <h3>Create anonymous/secret message and send to others!</h3>
+  <form class="mt-4" action="{% url 'create_message' %}" method="post">
+    {% csrf_token %}
+    <label class="form-label" for="anonmsg_message_field">Message:</label>
+    <div class="input-group">
+      <span class="input-group-text">{% bs_icon 'envelope' %}</span>
+      <textarea class="form-control" type="text" id="anonmsg_message_field" placeholder="Enter your anonymous message here" name="text_message" required ></textarea>
+    </div>
+    <div class="input-group mt-2">
+      <span class="input-group-text">{% bs_icon 'key' %}</span>
+      <input class="form-control" type="password" id="anonmsg_passphrase1" placeholder="Passphrase" name="passphrase" maxlength="64" required />
+    </div>
+    <div class="input-group mt-2">
+      <span class="input-group-text">{% bs_icon 'key' %}</span>
+      <input class="form-control" type="password" id="anonmsg_passphrase2" placeholder="Confirm passphrase" maxlength="64" required />
+    </div>
+    <div class="mt-2 alert d-none" role="alert" id="anonmsg_pmsg"></div>
+    <input type="submit" class="btn btn-primary d-block my-3 mx-auto" value="Create Message" onclick="return anonmsg_create_message_submit()" />
+  </form>
+
+  <hr/>
+  <h3>Or read already existing message</h3>
+  <form action="{% url 'read_message' %}" method="post">
+    {% csrf_token %}
+    <label class="form-label" for="anonmsg_id_field">Enter message ID:</label>
+    <div class="input-group">
+      <span class="input-group-text">{% bs_icon 'link' %}</span>
+      <input class="form-control" id="anonmsg_id_field" placeholder="Message ID" name="message_id" required />
+    </div>
+    <div class="input-group mt-2">
+      <span class="input-group-text">{% bs_icon 'key' %}</span>
+      <input class="form-control" type="password" id="anonmsg_passphrase3" placeholder="Passphrase" name="passphrase" required />
+    </div>
+    <input type="submit" class="btn btn-primary d-block my-3 mx-auto" value="Read Message" />
+  </form>
+{% endblock %}
